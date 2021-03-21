@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://victor-lol.github.io/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://victor-lol.github.io/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://victor-lol.github.io/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="https://victor-lol.github.io/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="https://victor-lol.github.io/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"victor-lol.github.io","root":"https://victor-lol.github.io/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="Background Image smoothing and Surface extraction Image smoothing refers to reducing noise within an image or producing a less pixelated image. An image can be smoothed by filters, which are various i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="White Box Cartoonization">
+<meta property="og:url" content="https://victor-lol.github.io/2021/03/21/White-Box/index.html">
+<meta property="og:site_name" content="Victor space">
+<meta property="og:description" content="Background Image smoothing and Surface extraction Image smoothing refers to reducing noise within an image or producing a less pixelated image. An image can be smoothed by filters, which are various i">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/Victor-lol/images_for_markdown/main/Whitebox/Surface%20Rep.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Victor-lol/images_for_markdown/main/Whitebox/Struecture%20Rep.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Victor-lol/images_for_markdown/main/Whitebox/Texture%20Rep.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Victor-lol/images_for_markdown/main/Whitebox/architecture.png">
+<meta property="article:published_time" content="2021-03-21T22:55:21.000Z">
+<meta property="article:modified_time" content="2021-03-21T22:56:25.456Z">
+<meta property="article:author" content="Jinsheng">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Victor-lol/images_for_markdown/main/Whitebox/Surface%20Rep.png">
+
+
+<link rel="canonical" href="https://victor-lol.github.io/2021/03/21/White-Box/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>White Box Cartoonization | Victor space</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="https://victor-lol.github.io/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Victor space</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="https://victor-lol.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="https://victor-lol.github.io/About" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#background"><span class="nav-number">1.</span> <span class="nav-text">Background</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-smoothing-and-surface-extraction"><span class="nav-number"></span> <span class="nav-text">Image smoothing and Surface extraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clustering-and-structure-extraction"><span class="nav-number"></span> <span class="nav-text">Clustering and Structure extraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#non-photorealistic-rendering-and-texture-representation"><span class="nav-number"></span> <span class="nav-text">Non-photorealistic rendering and Texture representation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gan"><span class="nav-number"></span> <span class="nav-text">GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-to-image-translation"><span class="nav-number"></span> <span class="nav-text">Image-to-Image translation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sturcture"><span class="nav-number"></span> <span class="nav-text">sturcture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loss-function"><span class="nav-number"></span> <span class="nav-text">loss function</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#learning-from-the-surfacetexture-representation"><span class="nav-number"></span> <span class="nav-text">Learning from the surface&#x2F;texture representation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#learning-from-the-structure-representation"><span class="nav-number"></span> <span class="nav-text">Learning from the structure representation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#full-model"><span class="nav-number"></span> <span class="nav-text">Full model</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reference"><span class="nav-number"></span> <span class="nav-text">Reference</span></a></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jinsheng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="https://victor-lol.github.io/archives">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://victor-lol.github.io/2021/03/21/White-Box/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://victor-lol.github.io/images/avatar.gif">
+      <meta itemprop="name" content="Jinsheng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Victor space">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          White Box Cartoonization
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-03-21 18:55:21 / Modified: 18:56:25" itemprop="dateCreated datePublished" datetime="2021-03-21T18:55:21-04:00">2021-03-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h5 id="background">Background</h5>
+<h3 id="image-smoothing-and-surface-extraction">Image smoothing and Surface extraction</h3>
+<p>Image smoothing refers to reducing noise within an image or producing a less pixelated image. An image can be smoothed by filters, which are various in the world (i.e. Gaussian, Laplacian filter). Generally, filters could help us keep the low or high frequency information in the image. In this model, author uses a differentiable filter extract the surface from the image. The surface includes high frequency information such as edges and textures. Visually, the image will be blurred. Also, image smoothing has a lot of applications. For instance, cameras in our phones have a function of decreasing noises and this function is implemented by image smoothing.</p>
+<a id="more"></a>
+<center>
+<img src="https://raw.githubusercontent.com/Victor-lol/images_for_markdown/main/Whitebox/Surface%20Rep.png" style="zoom:100%"/>
+</center>
+<hr/>
+<h3 id="clustering-and-structure-extraction">Clustering and Structure extraction</h3>
+<p>In machine learning, clustering algorithm is a kind of unsupervised algorithm and it could help us group data points together according to a certain feature. In computer vision world, clustering is helpful for extracting information of pixels given a specific feature, which could be created by hand. For example, given RGB information, we are able to cluster each pixels with their RGB values. In the paper, structure extraction aims to seize the global structural information and sparse color blocks in celluloid cartoon style. Using clustering algorithm (Superpixel is used in the paper), different color blocks are expected to be found and the result looks like a paint. A benefit of why we doing this, is that we are easy to get the basic outline of the image rather than losing/modifying pixel values just as image smoothing.</p>
+<center>
+<img src="https://raw.githubusercontent.com/Victor-lol/images_for_markdown/main/Whitebox/Struecture%20Rep.png" style="zoom:100%"/>
+</center>
+<hr/>
+<h3 id="non-photorealistic-rendering-and-texture-representation">Non-photorealistic rendering and Texture representation</h3>
+<p>In the paper, Non-photorealistic rendering (NPR) represents image content with artistic style. In orther words, NPR is capabable of synthesising image content with style of the cartoon image. Additionally, NPR could do image abstraction, which highlights semantic edges while ruling out the image details. Texture in the image represents edges and some details of the image. But it could be affected by the color and luminance, therefore, in the paper, author turns the RGB image into greyscale image, which is invariant to color and luminance. Using NPR and texture, the algorithm is able to translate the image to cartoon style while keeps the edges the same as before.</p>
+<center>
+<img src="https://raw.githubusercontent.com/Victor-lol/images_for_markdown/main/Whitebox/Texture%20Rep.png" style="zoom:100%"/>
+</center>
+<hr/>
+<h3 id="gan">GAN</h3>
+Generative Neural Networks is a framework of Neural Network, which consists of generator(s) and discriminator(s). Generator is trained to create fake objects(e.g. images) to cheat discriminator, and discriminator is trained to test whether the object created by the generator is fake. With GAN, Neural Network has ability to create images or something else.
+<hr/>
+<h3 id="image-to-image-translation">Image-to-Image translation</h3>
+<p>Image translation focus on the problem of translating an image from one domain to another domain. According to the paper, in cartoonization of image, author uses an unpaired image-to-image translation framework to cartoonize the image.</p>
+<h5 id="algorithm">Algorithm</h5>
+<h3 id="sturcture">sturcture</h3>
+<center>
+<img src="https://raw.githubusercontent.com/Victor-lol/images_for_markdown/main/Whitebox/architecture.png" style="zoom:50%"/>
+</center>
+<p>The architecture of the model is above. As we can see, after putting the input(real image) into the generator, the output is divided into three part for learning. One is <span class="math inline">\(F_{st}\)</span> which helps to learn the sturcture of the input, and another one is <span class="math inline">\(F_{rcs}\)</span>, which aims to learn the texture in the image, and lastly, <span class="math inline">\(F_{dgf}\)</span> is included to find the surface representation. Then we train three representation respectly, controlling our model to find the optimal network to cartoonize the image. Notice that cartoon image is combing with output when getting the texture and surface.</p>
+<p>As mentioned above, this NN algorithm uses GAN framework. In the paper, discriminator is used in learning texture representation and surface representation. Basicly, the discriminator's job is to compare the difference between surface/texture image and cartoon image, and then discriminator will give us a comparable result and we can use this result in loss function to learn how to capture the texture/surface. For the structure representation, this model uses VGG-16 which is pretrained , with output image and input image, to learn the content and the structure of how the cartoonized image should look like.</p>
+<p>One can come up with a question that when designing the network, why not use discriminator on structure representation. My explanation is we are doing style translation, we have to keep the basic information or feature4 of the image. To learn the feature of an image, such as structure, content and color, using convolutional NN as a feature extractor is better than a discriminator or rather a classifier. Discriminator is a helper in this task to transfer style, which is the pixels we can modify but not influence main pixels in the image.</p>
+<p>In the architecture of the model, the algorithm defines structure as the basis and texture and surface can be transfered to cartoonized style. The loss function is to ensure the architecture work as we expect.</p>
+<hr/>
+<h3 id="loss-function">loss function</h3>
+<p>There are six loss function as we see in the architecture, and they are distributed in each phrase of the algorithm. These loss functions can be helpful to control and learn our objectives, reguardless they might not find the global optimal solution, but a local optimal solution could still have a significant result of cartoonization.</p>
+<h4 id="learning-from-the-surfacetexture-representation">Learning from the surface/texture representation</h4>
+<p><span class="math display">\[
+\mathcal{L}_{surface}(G, D_s)= \log D_s(\mathcal{F}_{dgf}(I_c, I_c)))
+ + \log(1 - D_s(\mathcal{F}_{dgf}(G(I_p), G(I_p))))
+\]</span></p>
+<p>When learning surface, we have output and cartoon image as inputs. <span class="math inline">\(I_c\)</span> and <span class="math inline">\(I_p\)</span> represent cartoon image and output respectly. Then we calculate the surface using differentiable guided filter, following is a possible filter, to get the surface image for both cartoon images and output images.</p>
+<p><span class="math display">\[
+q_i= \frac{1}{|\mathcal{w}|}\sum_{k:i\in \mathcal{w}_k}(a_k I_i + b_k)
+\]</span></p>
+<p><span class="math display">\[
+W_{ij}= \frac{1}{|\mathcal{w}|^2}\sum_{k:i\in \mathcal{w}_k}(1 + \frac{(I_i - \mu_k)(I_j - \mu_k)}{\delta^2_k + \epsilon})
+\]</span></p>
+<p>For more information, you can check this <a target="_blank" rel="noopener" href="http://kaiminghe.com/publications/eccv10guidedfilter.pdf ">paper</a>. Back to the loss function, the loss function of surface representation uses log function, since it has a excellent performance on probability distribution. Therefore, it has a good property to do oiptimization jobs. Also, loss function of texture representation has the similiar design.</p>
+<p><span class="math display">\[
+\mathcal{L}_{texture}(G, D_t)= \log D_t(\mathcal{F}_{rcs}(I_c)))
+ + \log(1 - D_s(\mathcal{F}_{rcs}(G(I_p))))
+\]</span></p>
+<p><span class="math display">\[
+\mathcal{F}_{rcs}(I_rgb) = (1 - \alpha)(\beta_1 * I_r + \beta_2*I_g + \beta3 * I_b) + \alpha * Y
+\]</span> but the difference here is <span class="math inline">\(\mathcal{F}_{rcs}\)</span> only takes one argument as surface needs input itself as a guide map.</p>
+<h4 id="learning-from-the-structure-representation">Learning from the structure representation</h4>
+<p>After using spuerpixel algorithm, we get many colored segmented regions, however, spuerpixel only considers sililarity of pixels and ignore semantic information. Hence, the author uses felzenszwalb algorithm to segment iamges into separate regions, using the following equations:</p>
+<p><span class="math display">\[
+S_{i,j} = (\theta_1 * \bar{S} + \theta_2 * \hat{S})^{\mu}
+\]</span></p>
+<p><span class="math display">\[ 
+(\theta_1, \theta_2) = 
+\begin{cases}
+(0,1), &amp; \delta(S) &lt; \gamma_1 \\
+(0.5,0.5), &amp; \gamma_1 &lt; \delta(S) &lt; \gamma_2 \\
+(1,0)  &amp; \gamma_2 &lt; \delta(S)
+\end{cases}
+\]</span></p>
+<p>where they found <span class="math inline">\(\mu = 1.2\)</span>, <span class="math inline">\(\gamma_1 = 20\)</span>, <span class="math inline">\(\gamma_2 = 40\)</span>. Then we can throw the structure representation into the network (VGG-16) to learn. We have two loss functions here, one is <span class="math display">\[\mathcal{L}_{content} = ||VGG_n(G(I_p)) - VGG_n(I_p))||\]</span>,</p>
+<p>which ensures the cartoonized results and input images are semantically invariant. Another one is <span class="math display">\[ \mathcal{L}_{structure} = ||VGG_n(G(I_p)) - VGG_n(\mathcal{F}_{st}(G(I_p))))||\]</span>, which learns the structure information.</p>
+<p>Both of them simplely compare the Eculiden distance between feed-forward outputs. <span class="math inline">\(G(I_p)\)</span> is the generated result, <span class="math inline">\(\mathcal{F}_{st}(G(I_p)))\)</span> is the structure extraction of the generator image. <span class="math inline">\(I_p\)</span> is the input image.</p>
+<h4 id="full-model">Full model</h4>
+<p>With loss functions above, we can't have a desirable result. Consequently, we need more loss functions to make our result better. Since noise may interfere out generated image, author introduces <span class="math inline">\(\mathcal{L}_{tv}\)</span>, which looks like image's energy map to impose spatial smoothness and reduce high-frequency noises on the generated images.</p>
+<p><span class="math display">\[
+    \mathcal{L}_{tv} = \frac{1}{H*W*C}\|\nabla_x(G(I_p)) + \nabla_y(G(I_p))\|
+\]</span></p>
+<p>Also, to control the overall loss (and clearify how important each loss is), author introduces <span class="math display">\[\mathcal{L}_{total} = \lambda_1 *\mathcal{L}_{surface} +  \lambda_2 *\mathcal{L}_{texture} + \lambda_3 *\mathcal{L}_{structure} + \lambda_4 *\mathcal{L}_{content} \lambda_5 *\mathcal{L}_{tv}\]</span></p>
+<p>In experiment, author set <span class="math inline">\(\lambda_1 = 1\)</span>, <span class="math inline">\(\lambda_2 = 10\)</span>, <span class="math inline">\(\lambda_3 = 2 * 10^3\)</span>, <span class="math inline">\(\lambda_4 = 2 * 10^3\)</span> and <span class="math inline">\(\lambda_5 = 10^4\)</span>. In the end, the author shows his experiment work. If you are interested, check the <a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_Learning_to_Cartoonize_Using_White-Box_Cartoon_Representations_CVPR_2020_paper.pdf">paper</a>.</p>
+<h3 id="reference">Reference</h3>
+<ol type="1">
+<li>http://kaiminghe.com/publications/eccv10guidedfilter.pdf</li>
+<li>https://openaccess.thecvf.com/content_CVPR_2020/papers/Wang_Learning_to_Cartoonize_Using_White-Box_Cartoon_Representations_CVPR_2020_paper.pdf</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="https://victor-lol.github.io/2021/02/07/Drawing%20Sketch%20with%20Computer%20Vision/" rel="prev" title="Drawing Sketch with Computer Vision">
+                  <i class="fa fa-chevron-left"></i> Drawing Sketch with Computer Vision
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jinsheng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="https://victor-lol.github.io/js/utils.js"></script><script src="https://victor-lol.github.io/js/motion.js"></script><script src="https://victor-lol.github.io/js/schemes/muse.js"></script><script src="https://victor-lol.github.io/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
